@@ -5,27 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <style>
-      form {
-        padding : 20px;
-        position: fixed;
-        bottom : 0;
-        width : 100%;
-        padding-right: 50px;
-      }
-      #messages {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        width : 100%;
-      }
-      #messages li {
-        padding : 5px 10px;
-      }
-      #messages li:nth-child(odd) {
-        background: #eee ;
-      }
-    </style>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <div class="container-fluid">
@@ -58,8 +38,14 @@
         socket.emit('another event', {jeremy : 'I am great thank you'})
       })
       
-      $('form').submit(() => {
-        socket.emit('message' , $('#m').val())
+      $('form').submit(() => { 
+        socket.emit('message' , $('#m').val()) // send message to input
+        $('#m').val(''); // clear the input
+        return false;
+      });
+
+      socket.on('message', (msg) => {
+        $('#messages').append($('<li>').text(msg))
       })
     </script>
   </body>
