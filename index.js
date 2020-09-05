@@ -14,17 +14,21 @@ app.use(express.static('public'));
 //   res.sendFile(__dirname + '/public/index.html');
 // });
 
+// Namespaces for rooms
+// tech namespace
+const tech = io.of('/tech');
+
 // events : connection and message
-io.on('connection', (socket) => {
+tech.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('message', (msg) => {
     console.log(`message ${msg}`);
-    io.emit('message', msg);
+    tech.emit('message', msg);
   });
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
 
-    io.emit('message', 'user disconnected');
+    tech.emit('message', 'user disconnected');
   });
 });
