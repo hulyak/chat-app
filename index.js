@@ -20,10 +20,15 @@ const tech = io.of('/tech');
 
 // events : connection and message
 tech.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('message', (msg) => {
-    console.log(`message ${msg}`);
-    tech.emit('message', msg);
+  // join rooms
+  socket.on('join', (data) => {
+    socket.join(data.room);
+    tech.in(data.room).emit('message', `New user joined ${data.room} room`);
+  });
+
+  socket.on('message', (data) => {
+    console.log(`message ${data.msg}`);
+    tech.in(data.room).emit('message', data.msg);
   });
 
   socket.on('disconnect', () => {

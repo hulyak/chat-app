@@ -31,23 +31,28 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       // const socket = io.connect('http://localhost:3000');
+      // tech namespace has a room called 'javascript'
+      const room = 'javascript';
       // connect to tech namespace
       const socket = io('/tech');
-      socket.on('message', (data) => {
-        console.log(data);
-        // in index.js corresponding to 'another event'
-        socket.emit('another event', {jeremy : 'I am great thank you'})
-      })
+      
+      // socket.on('message', (data) => {
+      //   console.log(data);
+      //   // in index.js corresponding to 'another event'
+      //   socket.emit('another event', {jeremy : 'I am great thank you'})
+      // })
       
       $('form').submit(() => { 
-        socket.emit('message' , $('#m').val()) // send message to input
+        let msg = $('#m').val();
+        socket.emit('message' , {msg, room} ) // send message to input
         $('#m').val(''); // clear the input
         return false;
       });
 
       socket.on('connect', () => {
         // emitting to everybody
-        socket.emit('message' , 'user connected')
+        // socket.emit('message' , 'user connected')
+        socket.emit('join' , {room : room})
       });
 
       socket.on('message', (msg) => {
