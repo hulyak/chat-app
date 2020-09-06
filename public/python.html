@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Chatter / Tech / JavaScript</title>
+    <title>Chatter / Tech / Python</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -30,28 +30,17 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      // const socket = io.connect('http://localhost:3000');
-      // tech namespace has a room called 'javascript'
-      const room = 'javascript';
-      // connect to tech namespace
+      const room = 'python';
       const socket = io('/tech');
-      
-      // socket.on('message', (data) => {
-      //   console.log(data);
-      //   // in index.js corresponding to 'another event'
-      //   socket.emit('another event', {jeremy : 'I am great thank you'})
-      // })
-      
+
       $('form').submit(() => { 
         let msg = $('#m').val();
-        socket.emit('message' , {msg, room} ) // send message to input
-        $('#m').val(''); // clear the input
+        socket.emit('message' , {msg, room} )
+        $('#m').val(''); 
         return false;
       });
 
       socket.on('connect', () => {
-        // emitting to everybody
-        // socket.emit('message' , 'user connected')
         socket.emit('join' , {room : room})
       });
 

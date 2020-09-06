@@ -15,6 +15,14 @@ app.get('/javascript', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/javascript.html'));
 });
 
+app.get('/python', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/python.html'));
+});
+
+app.get('/node', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/node.html'));
+});
+
 // Namespaces for rooms
 // tech namespace
 const tech = io.of('/tech');
