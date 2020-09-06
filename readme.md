@@ -1,4 +1,15 @@
 # Chat app with multiple rooms
 
-Index.html is the client, connects to server with localhost, server(index.js) is expecting a connection, emit a message, client will receive that 'message', it will take the data, then it will emit a message 'another event'.
+## Installation
 
+- Make sure you have these installed
+
+```
+node.js
+git
+```
+
+- Clone this repository into your local machine using the terminal (mac) or Gitbash (PC) > git clone CLONEURL
+- CD to the folder cd FOLDERNAME
+- Run `npm install` to install the project dependencies
+- Run 'npm start` to start the app and connect to rooms!
