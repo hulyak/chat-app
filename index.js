@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const port = 3000;
@@ -10,9 +11,9 @@ server.listen(port, () => {
 
 app.use(express.static('public'));
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/public/index.html');
-// });
+app.get('/javascript', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/javascript.html'));
+});
 
 // Namespaces for rooms
 // tech namespace
